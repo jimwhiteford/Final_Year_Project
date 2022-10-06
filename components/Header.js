@@ -14,8 +14,9 @@ function Header(setDrawerOpen) {
   const [state, setState] = React.useState(false);
   return (
     <div className="sticky top-0 z-50 flex bg-white px-4 py-2 shadow-md">
+      <img className="object-scale-down h-12 w-12 mr-1" src="hive.jpg"></img>
       <a
-        className="flex items-center ml-3 text-yellow-300 font-extrabold text-5xl"
+        className="flex items-center ml-3 text-orange-400 font-extrabold text-5xl"
         href="/"
       >
         BUZZ
