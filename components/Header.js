@@ -36,8 +36,8 @@ function Header(setDrawerOpen) {
         <div className="hidden cursor-pointer items-center p-2 md:flex">
           <a className="text-black hover:text-yellow-400">Hives</a>
         </div>
-
-        <div className="hidden cursor-pointer text-gray-400 hover:text-yellow-400 items-center p-2  md:flex">
+        <hr class="w-1 h-11 bg-gray-300 rounded border-0" />
+        <div className="hidden cursor-pointer text-gray-400 hover:text-yellow-400 items-center p-2 md:flex">
           <div className="relative h-5 w-5 flex-shrink-0">
             <LoginIcon />
           </div>
