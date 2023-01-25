@@ -1,2 +1,0 @@
-Buzz
-The Apiary Manager
