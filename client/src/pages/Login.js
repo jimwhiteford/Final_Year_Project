@@ -1,0 +1,147 @@
+import { React, useState } from "react";
+import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [login, setLogin] = useState(false);
+  console.log(login);
+
+  const handleSubmit = (e) => {
+    // prevent the form from refreshing the whole page
+    e.preventDefault();
+    const configuration = {
+      method: "post",
+      url:
+        "http://localhost:3001/login" ||
+        "https://nodejs-mongodb-auth-app.herokuapp.com/login",
+      data: {
+        email,
+        password,
+      },
+    };
+    axios(configuration)
+      .then((result) => {
+        setLogin(true);
+        // set the cookie
+        cookies.set("TOKEN", result.data.token, {
+          path: "/",
+        });
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        error = new Error();
+      });
+  };
+
+  return (
+    <div onSubmit={(e) => handleSubmit(e)} className="bg-gray-10 ">
+      <div className="flex justify-center h-screen w-screen items-center">
+        <div className="w-full md:w-1/2 flex flex-col items-center ">
+          <h1 className="text-center text-2xl font-bold text-gray-600 mb-6">
+            LOGIN
+          </h1>
+
+          <div className="w-3/4 mb-6">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full py-4 px-8 bg-slate-200 placeholder:font-semibold rounded hover:ring-1 outline-blue-500"
+              placeholder="Email"
+            />
+          </div>
+
+          <div className="w-3/4 mb-6">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full py-4 px-8 bg-slate-200 placeholder:font-semibold rounded hover:ring-1 outline-blue-500 "
+              placeholder="Password"
+            />
+
+            <div className="w-3/4 flex flex-row justify-between">
+              <div className=" flex items-center gap-x-1">
+                <input
+                  type="checkbox"
+                  name="remember"
+                  id=""
+                  className=" w-4 h-4  "
+                />
+                <label className="text-sm text-slate-400">Remember me</label>
+              </div>
+              <div>
+                <a
+                  href="/register"
+                  className="text-sm text-slate-400 hover:text-blue-500"
+                >
+                  Not Registered?
+                </a>
+              </div>
+            </div>
+
+            <div className="w-3/4 mt-4">
+              <button
+                type="submit"
+                onClick={(e) => handleSubmit(e)}
+                className="py-4 bg-blue-400 w-full rounded text-blue-50 font-bold hover:bg-blue-700"
+              >
+                {" "}
+                LOGIN
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    //   <Form onSubmit={(e) => handleSubmit(e)}>
+    //     {/* display success message */}
+    //     {login ? (
+    //       <p className="text-success">You Are Logged in Successfully</p>
+    //     ) : (
+    //       <p className="text-danger">You Are Not Logged in</p>
+    //     )}
+    //     {/* email */}
+    //     <Form.Group controlId="formBasicEmail">
+    //       <Form.Label>Email address</Form.Label>
+    //       <Form.Control
+    //         type="email"
+    //         name="email"
+    //         value={email}
+    //         onChange={(e) => setEmail(e.target.value)}
+    //         placeholder="Enter email"
+    //       />
+    //     </Form.Group>
+
+    //     {/* password */}
+    //     <Form.Group controlId="formBasicPassword">
+    //       <Form.Label>Password</Form.Label>
+    //       <Form.Control
+    //         type="password"
+    //         name="password"
+    //         value={password}
+    //         onChange={(e) => setPassword(e.target.value)}
+    //         placeholder="Password"
+    //       />
+    //     </Form.Group>
+
+    //     {/* submit button */}
+    //     <Button
+    //       variant="primary"
+    //       type="submit"
+    //       onClick={(e) => handleSubmit(e)}
+    //     >
+    //       Login
+    //     </Button>
+    //   </Form>
+    // </>
+  );
+}
