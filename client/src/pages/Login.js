@@ -29,6 +29,9 @@ export default function Login() {
         cookies.set("TOKEN", result.data.token, {
           path: "/",
         });
+        cookies.set("EMAIL", result.data.email, {
+          path: "/",
+        });
         window.location.href = "/";
       })
       .catch((error) => {
@@ -37,7 +40,7 @@ export default function Login() {
   };
 
   return (
-    <div onSubmit={(e) => handleSubmit(e)} className="bg-gray-10 ">
+    <div onSubmit={(e) => handleSubmit(e)} className="bg-slate-300 ">
       <div className="flex justify-center h-screen w-screen items-center">
         <div className="w-full md:w-1/2 flex flex-col items-center ">
           <h1 className="text-center text-2xl font-bold text-gray-600 mb-6">
@@ -67,27 +70,18 @@ export default function Login() {
               placeholder="Password"
             />
 
-            <div className="w-3/4 flex flex-row justify-between">
-              <div className=" flex items-center gap-x-1">
-                <input
-                  type="checkbox"
-                  name="remember"
-                  id=""
-                  className=" w-4 h-4  "
-                />
-                <label className="text-sm text-slate-400">Remember me</label>
-              </div>
+            <div className="w-3/4 flex flex-row justify-between mt-7">
               <div>
                 <a
                   href="/register"
-                  className="text-sm text-slate-400 hover:text-blue-500"
+                  className="text-md text-slate-800 hover:text-blue-500"
                 >
                   Not Registered?
                 </a>
               </div>
             </div>
 
-            <div className="w-3/4 mt-4">
+            <div className="w-full mt-3">
               <button
                 type="submit"
                 onClick={(e) => handleSubmit(e)}

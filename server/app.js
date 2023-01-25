@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("./models/userModel");
+const Apiary = require("./models/apiaryModel");
+const Hive = require("./models/hiveModel");
 const auth = require("./auth");
 
 app.use(bodyParser.json());
@@ -98,6 +100,31 @@ app.post("/login", (request, response) => {
         e,
       });
     });
+});
+
+app.get("/getApiarys/:slug", (req, res) => {
+  const slugTemp = req.params.slug;
+  Apiary.find({ user: slugTemp }, (err, result) => {
+    if (err) {
+      res.status(500);
+    } else {
+      res.send(result);
+      res.status(200);
+    }
+  });
+});
+
+app.get("/getHives/:slug/:user", (req, res) => {
+  const slugTemp = req.params.slug;
+  const userTemp = req.params.user;
+  Hive.find({ apiary: slugTemp, user: userTemp }, (err, result) => {
+    if (err) {
+      res.status(500);
+    } else {
+      res.send(result);
+      res.status(200);
+    }
+  });
 });
 
 // free endpoint
