@@ -3,6 +3,7 @@ import React from "react";
 // import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 import logo from "../honeyLogo.png";
+import Menu from "../components/Menu";
 const cookies = new Cookies();
 
 const token = cookies.get("TOKEN");
@@ -18,8 +19,8 @@ function NavBar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-slate-800 shadow-md">
-      <div className="mx-auto px-8">
+    <div className=" bg-slate-800 shadow-md">
+      <div className="px-8 w-full">
         <div className="relative flex h-28 items-center justify-between">
           <div className="flex flex-1 justify-start items-center">
             <a href="/" className="flex items-center w-24">
@@ -42,27 +43,36 @@ function NavBar() {
                 QR Scan
               </a>
             </div>
+            <div className=" ml-9 mt-2">
+              {token ? (
+                <span
+                  onClick={() => logout()}
+                  className=" text-yellow-600 text-xl font-semibold cursor-pointer hover:text-yellow-500 inline-block"
+                >
+                  Logout
+                </span>
+              ) : (
+                <span
+                  onClick={() => login()}
+                  className=" text-yellow-600 text-xl font-semibold cursor-pointer hover:text-yellow-500 inline-block"
+                >
+                  Login
+                </span>
+              )}
+            </div>
           </div>
-          <div className="justify-end ml-11 mr-1 ">
-            {token ? (
-              <span
-                onClick={() => logout()}
-                className=" text-yellow-600 text-xl font-semibold cursor-pointer hover:text-yellow-500 inline-block"
-              >
-                Logout
-              </span>
-            ) : (
-              <span
-                onClick={() => login()}
-                className=" text-yellow-600 text-xl font-semibold cursor-pointer hover:text-yellow-500 inline-block"
-              >
-                Login
-              </span>
-            )}
+          <div className="sm:hidden">
+            <Menu />
           </div>
+          {/* <div class="space-y-4 sm:hidden cursor-pointer">
+            <div class="w-16 h-2 bg-yellow-600 rounded-md"></div>
+            <div class="w-16 h-2 bg-yellow-600 rounded-md"></div>
+            <div class="w-16 h-2 bg-yellow-600 rounded-md"></div>
+            <Menu />
+          </div> */}
         </div>
       </div>
-    </nav>
+    </div>
   );
 }
 

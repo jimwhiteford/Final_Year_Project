@@ -8,9 +8,7 @@ export default function Register() {
   console.log(register);
 
   const handleSubmit = (e) => {
-    // prevent the form from refreshing the whole page
     e.preventDefault();
-    // set configurations
     const configuration = {
       method: "post",
       url: "http://localhost:3001/register",
@@ -20,7 +18,6 @@ export default function Register() {
         password,
       },
     };
-    // make the API call
     axios(configuration)
       .then((result) => {
         setRegister(true);

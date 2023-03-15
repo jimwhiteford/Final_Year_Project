@@ -10,7 +10,6 @@ export default function Login() {
   console.log(login);
 
   const handleSubmit = (e) => {
-    // prevent the form from refreshing the whole page
     e.preventDefault();
     const configuration = {
       method: "post",
@@ -25,7 +24,6 @@ export default function Login() {
     axios(configuration)
       .then((result) => {
         setLogin(true);
-        // set the cookie
         cookies.set("TOKEN", result.data.token, {
           path: "/",
         });
@@ -95,47 +93,5 @@ export default function Login() {
         </div>
       </div>
     </div>
-
-    //   <Form onSubmit={(e) => handleSubmit(e)}>
-    //     {/* display success message */}
-    //     {login ? (
-    //       <p className="text-success">You Are Logged in Successfully</p>
-    //     ) : (
-    //       <p className="text-danger">You Are Not Logged in</p>
-    //     )}
-    //     {/* email */}
-    //     <Form.Group controlId="formBasicEmail">
-    //       <Form.Label>Email address</Form.Label>
-    //       <Form.Control
-    //         type="email"
-    //         name="email"
-    //         value={email}
-    //         onChange={(e) => setEmail(e.target.value)}
-    //         placeholder="Enter email"
-    //       />
-    //     </Form.Group>
-
-    //     {/* password */}
-    //     <Form.Group controlId="formBasicPassword">
-    //       <Form.Label>Password</Form.Label>
-    //       <Form.Control
-    //         type="password"
-    //         name="password"
-    //         value={password}
-    //         onChange={(e) => setPassword(e.target.value)}
-    //         placeholder="Password"
-    //       />
-    //     </Form.Group>
-
-    //     {/* submit button */}
-    //     <Button
-    //       variant="primary"
-    //       type="submit"
-    //       onClick={(e) => handleSubmit(e)}
-    //     >
-    //       Login
-    //     </Button>
-    //   </Form>
-    // </>
   );
 }
