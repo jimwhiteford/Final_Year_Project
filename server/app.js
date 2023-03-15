@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const User = require("./models/userModel");
 const Apiary = require("./models/apiaryModel");
 const Hive = require("./models/hiveModel");
+const Breed = require("./models/breedModel");
 const HiveType = require("./models/hiveTypeModel");
 const auth = require("./auth");
 // const path = require("path");
@@ -178,6 +179,17 @@ app.get("/getHiveTypes", (req, res) => {
   });
 });
 
+app.get("/getBreeds", (req, res) => {
+  Breed.find({}, (err, result) => {
+    if (err) {
+      res.status(500);
+    } else {
+      res.send(result);
+      res.status(200);
+    }
+  });
+});
+
 app.post("/createApiary", async (req, res) => {
   try {
     const newApiary = new Apiary(req.body);
@@ -198,6 +210,18 @@ app.post("/createHive", async (req, res) => {
     console.log(error);
     return res.status(400);
   }
+});
+
+app.route("/deleteApiary/:id").delete((req, res, next) => {
+  Apiary.findByIdAndRemove(req.params.id, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.status(200).json({
+        msg: data,
+      });
+    }
+  });
 });
 
 app.route("/deleteHive/:id").delete((req, res, next) => {

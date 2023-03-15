@@ -1,7 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ApiaryCard = ({ post }) => {
+  const deleteHive = () => {
+    axios
+      .delete(`http://localhost:3001/deleteApiary/${post._id}`)
+      .then((res) => {
+        console.log("Hive successfully deleted!");
+        window.location.reload(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
       <div className="relative overflow-hidden shadow-md pb-80 mb-6">
@@ -20,6 +35,12 @@ const ApiaryCard = ({ post }) => {
             See Your Hives
           </span>
         </Link>
+      </div>
+      <div
+        onClick={deleteHive}
+        className="text-center cursor-pointer p-3 text-xl hover:text-red-700"
+      >
+        <FontAwesomeIcon icon={faTrash} />
       </div>
     </div>
   );

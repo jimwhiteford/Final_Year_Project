@@ -13,6 +13,7 @@ const HiveCard = ({ post }) => {
       .delete(`http://localhost:3001/deleteHive/${post._id}`)
       .then((res) => {
         console.log("Hive successfully deleted!");
+        window.location.reload(false);
       })
       .catch((error) => {
         console.log(error);

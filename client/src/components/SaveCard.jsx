@@ -6,6 +6,7 @@ const SaveCard = (props) => {
   const [photo, setPhoto] = useState("");
   const [title, setTitle] = useState("");
   const [hiveType, setHiveType] = useState("");
+  const [breed, setBreed] = useState("");
 
   //   const [file, setFile] = useState();
 
@@ -19,7 +20,8 @@ const SaveCard = (props) => {
         photo: photo,
       })
       .then((response) => {
-        alert("Post Created");
+        alert("Apiary Created");
+        window.location.reload(false);
       })
       .catch((err) => {
         console.log(err);
@@ -35,20 +37,15 @@ const SaveCard = (props) => {
         title: title,
         slug: slugTemp,
         photo: photo,
-        hiveType: hiveType,
       })
       .then((response) => {
-        alert("Post Created");
+        alert("Hive Created");
+        window.location.reload(false);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
-  //   useEffect(() => {
-  //     setHiveType(props.hiveTypes);
-  //     console.log(hiveTypes);
-  //   });
 
   return (
     <div className="lg:col-span-4 col-span-1">
@@ -77,29 +74,36 @@ const SaveCard = (props) => {
                   onChange={(e) => setTitle(e.target.value)}
                 ></input>
                 {props.hiveTypes ? (
-                  <select
-                    value={hiveType}
-                    onChange={(e) => setHiveType(e.target.value)}
-                    className="text-gray-800 px-4 p-2 mb-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
-                  >
-                    {props.hiveTypes.map((hive) => (
-                      <option key={hive._id} value={hive.hiveModel}>
-                        {hive.hiveModel}
-                      </option>
-                    ))}
-                  </select>
+                  <div>
+                    <select
+                      value={hiveType}
+                      onChange={(e) => setHiveType(e.target.value)}
+                      className="text-gray-800 px-4 p-2 mb-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
+                    >
+                      {props.hiveTypes.map((hive) => (
+                        <option key={hive._id} value={hive.hiveModel}>
+                          {hive.hiveModel}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      value={breed}
+                      onChange={(e) => setBreed(e.target.value)}
+                      className="text-gray-800 px-4 p-2 mb-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
+                    >
+                      {props.breeds.map((breed) => (
+                        <option key={breed._id} value={breed.breed}>
+                          {breed.breed}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 ) : (
                   <div></div>
                 )}
               </div>
             </div>
-            <div>
-              {/* <JoditEditor
-                ref={editor}
-                value={content}
-                onChange={(newContent) => setContent(newContent)}
-              /> */}
-            </div>
+
             <div className="text-center" type="submit">
               <div onClick={props.slug ? sendHiveContent : sendContent}>
                 <span className="transition duration-200 transform hover:-translate-y-1 inline-block hover:bg-purple-500 bg-purple-700 text-lg font-medium rounded-full text-white px-8 py-2 mt-7 cursor-pointer">
