@@ -1,12 +1,35 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+// const multer = require("multer");
+// const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("./models/userModel");
 const Apiary = require("./models/apiaryModel");
 const Hive = require("./models/hiveModel");
 const auth = require("./auth");
+// const path = require("path");
+
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "images");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
+//   },
+// });
+
+// const fileFilter = (req, file, cb) => {
+//   const allowedFileTypes = ["image/jpeg", "image/jpg", "image/png"];
+//   if (allowedFileTypes.includes(file.mimetype)) {
+//     cb(null, true);
+//   } else {
+//     cb(null, false);
+//   }
+// };
+
+// let upload = multer({ storage, fileFilter });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -71,7 +94,6 @@ app.post("/login", (request, response) => {
               error,
             });
           }
-
           const token = jwt.sign(
             {
               userId: user._id,
@@ -126,6 +148,55 @@ app.get("/getHives/:slug/:user", (req, res) => {
     }
   });
 });
+
+app.get("/getHive/:apiary/:slug/:user", (req, res) => {
+  const slugTemp = req.params.slug;
+  const userTemp = req.params.user;
+  const apiaryTemp = req.params.apiary;
+  Hive.findOne(
+    { apiary: apiaryTemp, user: userTemp, slug: slugTemp },
+    (err, result) => {
+      if (err) {
+        res.status(500);
+      } else {
+        res.send(result);
+        res.status(200);
+      }
+    }
+  );
+});
+
+app.post("/createApiary", async (req, res) => {
+  try {
+    const newApiary = new Apiary(req.body);
+    const insertApiary = await newApiary.save();
+    return res.status(200).json(insertApiary);
+  } catch (error) {
+    console.log(error);
+    return res.status(400);
+  }
+});
+
+// app.route("/createApiary").post(upload.single("photo"), (req, res) => {
+//   const title = req.body.title;
+//   const slug = req.body.slug;
+//   const user = req.body.user;
+//   const photo = req.file.filename;
+
+//   const newApiary = {
+//     title,
+//     slug,
+//     user,
+//     photo,
+//   };
+
+//   const newApiaryUpload = new Apiary(newApiary);
+
+//   newApiaryUpload
+//     .save()
+//     .then(() => res.json("Apiary Added"))
+//     .catch((err) => res.status(400).json("Error: " + err));
+// });
 
 // free endpoint
 app.get("/free-endpoint", (request, response) => {
