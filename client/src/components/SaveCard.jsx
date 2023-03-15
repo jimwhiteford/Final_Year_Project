@@ -5,6 +5,8 @@ import axios from "axios";
 const SaveCard = (props) => {
   const [photo, setPhoto] = useState("");
   const [title, setTitle] = useState("");
+  const [hiveType, setHiveType] = useState("");
+
   //   const [file, setFile] = useState();
 
   const sendContent = () => {
@@ -24,13 +26,37 @@ const SaveCard = (props) => {
       });
   };
 
+  const sendHiveContent = () => {
+    const slugTemp = title.replace(/\s+/g, "-").toLowerCase();
+    axios
+      .post("http://localhost:3001/createHive", {
+        user: props.user,
+        apiary: props.slug,
+        title: title,
+        slug: slugTemp,
+        photo: photo,
+        hiveType: hiveType,
+      })
+      .then((response) => {
+        alert("Post Created");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //   useEffect(() => {
+  //     setHiveType(props.hiveTypes);
+  //     console.log(hiveTypes);
+  //   });
+
   return (
     <div className="lg:col-span-4 col-span-1">
       <div className="lg:sticky relative top-8">
         <div>
           <div className="bg-white shadow-lg rounded-lg p-7 mb-12">
             <h3 className="text-xl mb-7 font-semibold border-b pb-4 text-black">
-              Add a new Apiary
+              {props.slug ? "Add a new hive" : "Add a new apiary"}
             </h3>
             <div>
               <div>
@@ -42,25 +68,30 @@ const SaveCard = (props) => {
                   value={photo}
                   onChange={(e) => setPhoto(e.target.value)}
                 ></input>
-                {/* <input
-                  type="file"
-                  accept=".png, .jpg, .jpeg"
-                  name="photo"
-                  onChange={(e) => setFile(e.target.files[0])}
-                ></input> */}
-                {/* <FileBase64
-                  type="file"
-                  multiple={false}
-                  onDone={(base64) => setFile(base64)}
-                /> */}
                 <input
-                  className="text-gray-800 px-4 p-2 mb-3 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
-                  placeholder="Title"
+                  className="text-gray-800 px-4 p-2 mb-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
+                  placeholder="Name"
                   name="title"
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 ></input>
+                {props.hiveTypes ? (
+                  <select
+                    value={hiveType}
+                    placeholder="Choose a hive model"
+                    onChange={(e) => setHiveType(e.target.value)}
+                    className="text-gray-800 px-4 p-2 mb-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
+                  >
+                    {props.hiveTypes.map((hive) => (
+                      <option key={hive._id} value={hive.hiveModel}>
+                        {hive.hiveModel}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <div></div>
+                )}
               </div>
             </div>
             <div>
@@ -71,7 +102,7 @@ const SaveCard = (props) => {
               /> */}
             </div>
             <div className="text-center" type="submit">
-              <div onClick={sendContent}>
+              <div onClick={props.slug ? sendHiveContent : sendContent}>
                 <span className="transition duration-200 transform hover:-translate-y-1 inline-block hover:bg-purple-500 bg-purple-700 text-lg font-medium rounded-full text-white px-8 py-2 mt-7 cursor-pointer">
                   Save
                 </span>

@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const User = require("./models/userModel");
 const Apiary = require("./models/apiaryModel");
 const Hive = require("./models/hiveModel");
+const HiveType = require("./models/hiveTypeModel");
 const auth = require("./auth");
 // const path = require("path");
 
@@ -166,11 +167,33 @@ app.get("/getHive/:apiary/:slug/:user", (req, res) => {
   );
 });
 
+app.get("/getHiveTypes", (req, res) => {
+  HiveType.find({}, (err, result) => {
+    if (err) {
+      res.status(500);
+    } else {
+      res.send(result);
+      res.status(200);
+    }
+  });
+});
+
 app.post("/createApiary", async (req, res) => {
   try {
     const newApiary = new Apiary(req.body);
     const insertApiary = await newApiary.save();
     return res.status(200).json(insertApiary);
+  } catch (error) {
+    console.log(error);
+    return res.status(400);
+  }
+});
+
+app.post("/createHive", async (req, res) => {
+  try {
+    const newHive = new Hive(req.body);
+    const insertHive = await newHive.save();
+    return res.status(200).json(insertHive);
   } catch (error) {
     console.log(error);
     return res.status(400);

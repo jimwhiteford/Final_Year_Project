@@ -25,7 +25,10 @@ const Hive = new mongoose.Schema({
     type: String,
     unique: false,
   },
-  type: [{ type: String }],
+  hiveType: {
+    type: String,
+    unique: false,
+  },
 });
 
 module.exports = mongoose.model.Hives || mongoose.model("Hives", Hive);
