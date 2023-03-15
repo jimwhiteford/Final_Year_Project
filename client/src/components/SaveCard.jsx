@@ -79,7 +79,6 @@ const SaveCard = (props) => {
                 {props.hiveTypes ? (
                   <select
                     value={hiveType}
-                    placeholder="Choose a hive model"
                     onChange={(e) => setHiveType(e.target.value)}
                     className="text-gray-800 px-4 p-2 mb-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
                   >

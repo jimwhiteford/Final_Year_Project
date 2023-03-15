@@ -200,6 +200,18 @@ app.post("/createHive", async (req, res) => {
   }
 });
 
+app.route("/deleteHive/:id").delete((req, res, next) => {
+  Hive.findByIdAndRemove(req.params.id, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.status(200).json({
+        msg: data,
+      });
+    }
+  });
+});
+
 // app.route("/createApiary").post(upload.single("photo"), (req, res) => {
 //   const title = req.body.title;
 //   const slug = req.body.slug;
