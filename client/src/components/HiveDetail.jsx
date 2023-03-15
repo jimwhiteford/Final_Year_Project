@@ -42,10 +42,8 @@ const HiveDetail = (props) => {
           onChange={(e) => setQueenNote(e.target.value)}
           className="text-gray-800 px-4 p-2 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
         ></textarea>
-
         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
         <p className="text-xl font-semibold">Hive Deatails</p>
-
         <select
           value={hiveType}
           onChange={(e) => setHiveType(e.target.value)}
@@ -57,8 +55,7 @@ const HiveDetail = (props) => {
             </option>
           ))}
         </select>
-
-        {hiveType === "Layens" || "Horizontal" ? (
+        {hiveType === "Layens" || hiveType === "Horizontal" ? (
           <div>
             <input
               type="number"
@@ -67,6 +64,9 @@ const HiveDetail = (props) => {
             ></input>
           </div>
         ) : (
+          <></>
+        )}
+        {hiveType === "National" || hiveType === "Langstroth" ? (
           <div>
             <input
               type="number"
@@ -79,6 +79,8 @@ const HiveDetail = (props) => {
               className="text-gray-800 px-4 p-2 mb-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
             ></input>
           </div>
+        ) : (
+          <></>
         )}
 
         <div className="text-center">
