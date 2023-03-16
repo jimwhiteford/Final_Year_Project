@@ -1,16 +1,14 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import FileBase64 from "react-file-base64";
+import stockApiary from "../stockapiary.jpg";
+import stockHive from "../beehive.jpg";
 
 const SaveCard = (props) => {
   const navigate = useNavigate();
   const [photo, setPhoto] = useState("");
   const [title, setTitle] = useState("");
-  const [hiveType, setHiveType] = useState("");
-  const [breed, setBreed] = useState("");
-
-  console.log(photo);
 
   const sendContent = () => {
     const slugTemp = title.replace(/\s+/g, "-").toLowerCase();
@@ -57,63 +55,47 @@ const SaveCard = (props) => {
       });
   };
 
+  useEffect(() => {
+    if (props.slug) {
+      setPhoto(stockHive);
+    } else {
+      setPhoto(stockApiary);
+    }
+  }, []);
+
   return (
     <div className="lg:col-span-4 col-span-1">
       <div className="lg:sticky relative top-8">
         <div>
           <div className="bg-white shadow-lg rounded-lg p-7 mb-12">
-            <h3 className="text-xl mb-7 font-semibold border-b pb-4 text-black">
+            <h3 className="text-2xl mb-7 font-semibold border-b pb-4 text-black">
               {props.slug ? "Add a new hive" : "Add a new apiary"}
             </h3>
             <div>
               <div>
+                <p className="font-semibold text-lg">Apiary image:</p>
                 <FileBase64
-                  className="text-gray-800 px-4 p-2 mb-8 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
+                  className="text-gray-800 ml-2 w-full"
                   multiple={false}
                   onDone={({ base64 }) => setPhoto(base64)}
                 />
+                <img className="mt-4" src={photo} alt="image" />
+
+                <p className="font-semibold text-lg mt-8">Apiary name:</p>
                 <input
-                  className="text-gray-800 px-4 p-2 mb-4 mt-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
+                  className="text-gray-800 px-4 p-2 mb-1 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
                   placeholder="Name"
                   name="title"
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 ></input>
-                {props.hiveTypes ? (
-                  <div>
-                    <select
-                      value={hiveType}
-                      onChange={(e) => setHiveType(e.target.value)}
-                      className="text-gray-800 px-4 p-2 mb-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
-                    >
-                      {props.hiveTypes.map((hive) => (
-                        <option key={hive._id} value={hive.hiveModel}>
-                          {hive.hiveModel}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      value={breed}
-                      onChange={(e) => setBreed(e.target.value)}
-                      className="text-gray-800 px-4 p-2 mb-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
-                    >
-                      {props.breeds.map((breed) => (
-                        <option key={breed._id} value={breed.breed}>
-                          {breed.breed}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
               </div>
             </div>
 
             <div className="text-center" type="submit">
               <div onClick={props.slug ? sendHiveContent : sendContent}>
-                <span className="transition duration-200 transform hover:-translate-y-1 inline-block hover:bg-purple-500 bg-purple-700 text-lg font-medium rounded-full text-white px-8 py-2 mt-7 cursor-pointer">
+                <span className="transition duration-200 transform hover:-translate-y-1 inline-block hover:bg-yellow-500 bg-yellow-600 text-lg font-medium rounded-full text-white px-8 py-2 mt-7 cursor-pointer">
                   Save
                 </span>
               </div>
