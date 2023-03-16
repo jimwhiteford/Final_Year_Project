@@ -33,6 +33,30 @@ const Hive = new mongoose.Schema({
     type: String,
     unique: false,
   },
+  queenId: {
+    type: String,
+    unique: false,
+  },
+  queenNote: {
+    type: String,
+    unique: false,
+  },
+  hiveNote: {
+    type: String,
+    unique: false,
+  },
+  broodBox: {
+    type: String,
+    unique: false,
+  },
+  supers: {
+    type: String,
+    unique: false,
+  },
+  topBar: {
+    type: String,
+    unique: false,
+  },
 });
 
 module.exports = mongoose.model.Hives || mongoose.model("Hives", Hive);

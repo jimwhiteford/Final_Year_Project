@@ -212,6 +212,24 @@ app.post("/createHive", async (req, res) => {
   }
 });
 
+app.route("/updateHive/:id").put((req, res, next) => {
+  Hive.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: req.body,
+    },
+    (error, data) => {
+      if (error) {
+        return next(error);
+        console.log(error);
+      } else {
+        res.json(data);
+        console.log("Hive updated successfully !");
+      }
+    }
+  );
+});
+
 app.route("/deleteApiary/:id").delete((req, res, next) => {
   Apiary.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {

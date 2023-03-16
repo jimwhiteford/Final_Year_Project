@@ -37,6 +37,14 @@ const SaveCard = (props) => {
         title: title,
         slug: slugTemp,
         photo: photo,
+        hiveType: "",
+        breed: "",
+        queenId: "",
+        queenNote: "",
+        hiveNote: "",
+        broodBox: "",
+        supers: "",
+        topBar: "",
       })
       .then((response) => {
         alert("Hive Created");
