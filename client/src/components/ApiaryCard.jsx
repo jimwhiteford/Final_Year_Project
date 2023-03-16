@@ -1,16 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ApiaryCard = ({ post }) => {
+  const navigate = useNavigate();
+  console.log(post.photo);
   const deleteHive = () => {
     axios
       .delete(`http://localhost:3001/deleteApiary/${post._id}`)
       .then((res) => {
         console.log("Hive successfully deleted!");
-        window.location.reload(false);
+        navigate(0);
       })
       .catch((error) => {
         console.log(error);
@@ -25,6 +27,11 @@ const ApiaryCard = ({ post }) => {
           alt={post.title}
           className="object-top absolute h-80 w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg"
         />
+        {/* <FileBase64
+          className="text-gray-800 px-4 p-2 mb-8 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
+          multiple={false}
+          
+        /> */}
       </div>
       <h1 className="text-slate-600 text-center mb-8 text-3xl font-semibold">
         {post.title}

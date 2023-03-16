@@ -11,28 +11,8 @@ const Hive = require("./models/hiveModel");
 const Breed = require("./models/breedModel");
 const HiveType = require("./models/hiveTypeModel");
 const auth = require("./auth");
-// const path = require("path");
 
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "images");
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
-//   },
-// });
-
-// const fileFilter = (req, file, cb) => {
-//   const allowedFileTypes = ["image/jpeg", "image/jpg", "image/png"];
-//   if (allowedFileTypes.includes(file.mimetype)) {
-//     cb(null, true);
-//   } else {
-//     cb(null, false);
-//   }
-// };
-
-// let upload = multer({ storage, fileFilter });
-
+app.use(express.json({ limit: "52428800" }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {

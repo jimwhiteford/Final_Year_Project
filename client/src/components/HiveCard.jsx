@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -7,13 +7,13 @@ import axios from "axios";
 
 const HiveCard = ({ post }) => {
   const { slug } = useParams();
-
+  const navigate = useNavigate();
   const deleteHive = () => {
     axios
       .delete(`http://localhost:3001/deleteHive/${post._id}`)
       .then((res) => {
         console.log("Hive successfully deleted!");
-        window.location.reload(false);
+        navigate(0);
       })
       .catch((error) => {
         console.log(error);

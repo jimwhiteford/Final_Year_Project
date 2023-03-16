@@ -1,14 +1,16 @@
 import { React, useState } from "react";
 import axios from "axios";
-// import FileBase64 from "react-file-base64";
+import { useNavigate } from "react-router-dom";
+import FileBase64 from "react-file-base64";
 
 const SaveCard = (props) => {
+  const navigate = useNavigate();
   const [photo, setPhoto] = useState("");
   const [title, setTitle] = useState("");
   const [hiveType, setHiveType] = useState("");
   const [breed, setBreed] = useState("");
 
-  //   const [file, setFile] = useState();
+  console.log(photo);
 
   const sendContent = () => {
     const slugTemp = title.replace(/\s+/g, "-").toLowerCase();
@@ -21,7 +23,7 @@ const SaveCard = (props) => {
       })
       .then((response) => {
         alert("Apiary Created");
-        window.location.reload(false);
+        navigate(0);
       })
       .catch((err) => {
         console.log(err);
@@ -48,7 +50,7 @@ const SaveCard = (props) => {
       })
       .then((response) => {
         alert("Hive Created");
-        window.location.reload(false);
+        navigate(0);
       })
       .catch((err) => {
         console.log(err);
@@ -65,16 +67,13 @@ const SaveCard = (props) => {
             </h3>
             <div>
               <div>
+                <FileBase64
+                  className="text-gray-800 px-4 p-2 mb-8 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
+                  multiple={false}
+                  onDone={({ base64 }) => setPhoto(base64)}
+                />
                 <input
-                  className="text-gray-800 px-4 p-2 mb-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
-                  placeholder="Photo URL"
-                  name="photo"
-                  type="text"
-                  value={photo}
-                  onChange={(e) => setPhoto(e.target.value)}
-                ></input>
-                <input
-                  className="text-gray-800 px-4 p-2 mb-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
+                  className="text-gray-800 px-4 p-2 mb-4 mt-4 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
                   placeholder="Name"
                   name="title"
                   type="text"
