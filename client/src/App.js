@@ -22,11 +22,15 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/" element={<Home />} />
             <Route element={<PrivateRoutes />}>
-              <Route path="/apiarys" element={<Apiarys />} />
+              {/* <Route path="/apiarys" element={<Apiarys />} />
               <Route path="/apiarys/:slug" element={<Hives />} />
               <Route path="/apiarys/:apiary/:slug" element={<Hive />} />
-              <Route path="/QRscan" element={<QR />} />
+              <Route path="/QRscan" element={<QR />} /> */}
             </Route>
+            <Route path="/apiarys" element={<Apiarys />} />
+            <Route path="/apiarys/:slug" element={<Hives />} />
+            <Route path="/apiarys/:apiary/:slug" element={<Hive />} />
+            <Route path="/QRscan" element={<QR />} />
           </Routes>
         </BrowserRouter>
       </div>

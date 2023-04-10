@@ -61,7 +61,7 @@ const SaveCard = (props) => {
     } else {
       setPhoto(stockApiary);
     }
-  }, []);
+  }, [props.slug]);
 
   return (
     <div className="lg:col-span-4 col-span-1">
@@ -79,7 +79,7 @@ const SaveCard = (props) => {
                   multiple={false}
                   onDone={({ base64 }) => setPhoto(base64)}
                 />
-                <img className="mt-4" src={photo} alt="image" />
+                <img className="mt-4" src={photo} alt="" />
 
                 <p className="font-semibold text-lg mt-8">Apiary name:</p>
                 <input

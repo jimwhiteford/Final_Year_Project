@@ -8,7 +8,7 @@ const HiveCard = () => {
 
   useEffect(() => {
     navigate(scanResult);
-  }, [scanResult]);
+  }, [scanResult, navigate]);
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8">

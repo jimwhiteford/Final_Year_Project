@@ -56,7 +56,7 @@ export default function Example() {
             <Menu.Item>
               {({ active }) => (
                 <Link
-                  to="/"
+                  to="/QRscan"
                   className={classNames(
                     active ? "bg-gray-100" : "text-yellow-500",
                     "block px-4 py-3 text-4xl no-underline hover:text-yellow-700"
