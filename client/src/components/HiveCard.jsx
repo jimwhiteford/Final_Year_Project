@@ -8,7 +8,6 @@ import QRCode from "qrcode";
 
 const HiveCard = ({ post }) => {
   const [qr, setQr] = useState("");
-  const [display, setDisplay] = useState(false);
   const { slug } = useParams();
   const navigate = useNavigate();
 

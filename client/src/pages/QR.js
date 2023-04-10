@@ -1,10 +1,6 @@
-import { React, useState, useEffect } from "react";
+import { React } from "react";
 import QRScanCard from "../components/QRScanCard";
-import Cookies from "universal-cookie";
 import AddCard from "../components/AddCard";
-
-const cookies = new Cookies();
-const user = cookies.get("EMAIL");
 
 export default function Apiarys() {
   return (

@@ -4,6 +4,7 @@ import React from "react";
 import Cookies from "universal-cookie";
 import logo from "../honeyLogo.png";
 import Menu from "../components/Menu";
+import { Link } from "react-router-dom";
 const cookies = new Cookies();
 
 const token = cookies.get("TOKEN");
@@ -29,19 +30,17 @@ function NavBar() {
           </div>
           <div className="hidden ml-6 sm:flex">
             <div className="flex space-x-6">
-              <a
-                href="/apiarys"
-                className="bg-yellow-600 text-black hover:bg-yellow-500 px-3 py-2 rounded-md text-lg font-medium no-underline"
-              >
-                Apiary's
-              </a>
+              <Link to={"Apiarys"} k>
+                <button className="bg-yellow-600 text-black hover:bg-yellow-500 px-3 py-2 rounded-md text-lg font-medium no-underline">
+                  Apiary's
+                </button>
+              </Link>
 
-              <a
-                href="QRscan"
-                className="bg-yellow-600 text-black hover:bg-yellow-500 px-3 py-2 rounded-md text-lg font-medium no-underline"
-              >
-                QR Scan
-              </a>
+              <Link to={"QRScan"}>
+                <button className="bg-yellow-600 text-black hover:bg-yellow-500 px-3 py-2 rounded-md text-lg font-medium no-underline">
+                  QR Scan
+                </button>
+              </Link>
             </div>
             <div className=" ml-9 mt-2">
               {token ? (
