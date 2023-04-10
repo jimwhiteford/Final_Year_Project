@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 //import Auth from "./components/AuthComponent";
-import Free from "./components/FreeComponent";
+import QR from "./pages/QR";
 import Apiarys from "./pages/Apiarys";
 import Hives from "./pages/Hives";
 import Hive from "./pages/Hive";
@@ -26,7 +26,7 @@ const App = () => {
               <Route path="/apiarys/:slug" element={<Hives />} />
               <Route path="/apiarys/:apiary/:slug" element={<Hive />} />
             </Route>
-            <Route path="/free" element={<Free />} />
+            <Route path="/QRscan" element={<QR />} />
           </Routes>
         </BrowserRouter>
       </div>

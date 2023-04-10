@@ -78,7 +78,7 @@ const HiveDetail = (props) => {
           {props.hive.title}
         </h1>
         <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-        <p className="text-xl font-semibold">Queen Deatails</p>
+        <p className="text-xl font-semibold">Queen Details</p>
         {!isUpdate ? (
           <div>
             <div className="flex">
@@ -127,7 +127,7 @@ const HiveDetail = (props) => {
         )}
 
         <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-        <p className="text-xl font-semibold">Hive Deatails</p>
+        <p className="text-xl font-semibold">Hive Details</p>
         {!isUpdate ? (
           <div>
             <div className="flex">

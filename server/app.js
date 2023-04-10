@@ -84,7 +84,6 @@ app.post("/login", (request, response) => {
             "RANDOM-TOKEN",
             { expiresIn: "24h" }
           );
-
           response.status(200).send({
             message: "Login Successful",
             email: user.email,
