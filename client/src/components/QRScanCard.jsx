@@ -14,6 +14,8 @@ const HiveCard = () => {
     <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8">
       <div className="relative overflow-hidden shadow-md mb-4">
         <QrReader
+          key="enviroment"
+          constraints={{ facingMode: "enviroment" }}
           onResult={(result, error) => {
             if (!!result) {
               setScanResult(result?.text);
