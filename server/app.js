@@ -18,7 +18,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://flourishing-pixie-bf773a.netlify.app/",
+      "https://flourishing-pixie-bf773a.netlify.app",
     ],
   })
 );

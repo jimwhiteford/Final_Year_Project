@@ -11,7 +11,7 @@ export default function Login() {
   console.log(login);
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const configuration = {
       method: "post",
       url: `${URL}/login`,
@@ -33,11 +33,12 @@ export default function Login() {
       })
       .catch((error) => {
         error = new Error();
+        alert("Couldnt Login");
       });
   };
 
   return (
-    <div onSubmit={(e) => handleSubmit(e)} className="bg-slate-300 ">
+    <form onSubmit={(e) => handleSubmit(e)} className="bg-slate-300 ">
       <div className="flex justify-center h-screen w-screen items-center">
         <div className="w-full md:w-1/2 flex flex-col items-center ">
           <h1 className="text-center text-2xl font-bold text-gray-600 mb-6">
@@ -79,16 +80,15 @@ export default function Login() {
             </div>
 
             <div className="w-full mt-3">
-              <button
-                onClick={(e) => handleSubmit(e)}
+              <input
+                value="Login"
+                type="submit"
                 className="py-4 bg-blue-400 w-full rounded text-blue-50 font-bold hover:bg-blue-700"
-              >
-                LOGIN
-              </button>
+              />
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
