@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { URL } from "../App";
 const cookies = new Cookies();
 
 export default function Login() {
@@ -10,12 +11,10 @@ export default function Login() {
   console.log(login);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const configuration = {
       method: "post",
-      url:
-        "http://localhost:3001/login" ||
-        "https://nodejs-mongodb-auth-app.herokuapp.com/login",
+      url: `${URL}/login`,
       data: {
         email,
         password,
@@ -81,11 +80,9 @@ export default function Login() {
 
             <div className="w-full mt-3">
               <button
-                type="submit"
                 onClick={(e) => handleSubmit(e)}
                 className="py-4 bg-blue-400 w-full rounded text-blue-50 font-bold hover:bg-blue-700"
               >
-                {" "}
                 LOGIN
               </button>
             </div>

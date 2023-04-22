@@ -1,22 +1,21 @@
 import React from "react";
-// import axios from "axios";
-// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import logo from "../honeyLogo.png";
 import Menu from "../components/Menu";
 import { Link } from "react-router-dom";
 const cookies = new Cookies();
-
 const token = cookies.get("TOKEN");
 
 function NavBar() {
+  const navigate = useNavigate();
   const logout = () => {
     cookies.remove("TOKEN", { path: "/" });
     window.location.href = "/";
   };
 
   const login = () => {
-    window.location.href = "/login";
+    navigate("/login");
   };
 
   return (
@@ -30,13 +29,13 @@ function NavBar() {
           </div>
           <div className="hidden ml-6 sm:flex">
             <div className="flex space-x-6">
-              <Link to={"Apiarys"} k>
+              <Link to={"apiarys"}>
                 <button className="bg-yellow-600 text-black hover:bg-yellow-500 px-3 py-2 rounded-md text-lg font-medium no-underline">
                   Apiary's
                 </button>
               </Link>
 
-              <Link to={"QRScan"}>
+              <Link to={"qrscan"}>
                 <button className="bg-yellow-600 text-black hover:bg-yellow-500 px-3 py-2 rounded-md text-lg font-medium no-underline">
                   QR Scan
                 </button>
