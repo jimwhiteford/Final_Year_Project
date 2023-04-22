@@ -1,8 +1,6 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-// const multer = require("multer");
-// const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("./models/userModel");
@@ -11,10 +9,14 @@ const Hive = require("./models/hiveModel");
 const Breed = require("./models/breedModel");
 const HiveType = require("./models/hiveTypeModel");
 const auth = require("./auth");
+const cors = require("cors");
 
 app.use(express.json({ limit: "52428800" }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  cors({ origin: ["http://localhost:3000", "https://buzz.onrender.com"] })
+);
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
