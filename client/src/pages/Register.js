@@ -26,6 +26,7 @@ export default function Register() {
       })
       .catch((error) => {
         error = new Error();
+        alert("couldnt register");
       });
   };
 
