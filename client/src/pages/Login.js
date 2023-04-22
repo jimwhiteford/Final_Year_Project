@@ -1,8 +1,9 @@
 import { React, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { URL } from "../App";
+// import { URL } from "../App";
 const cookies = new Cookies();
+const URL = process.env.REACT_APP_SERVER_URL;
 
 export default function Login() {
   const [email, setEmail] = useState("");
