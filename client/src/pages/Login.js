@@ -15,7 +15,7 @@ export default function Login() {
     e.preventDefault();
     const configuration = {
       method: "post",
-      url: `https://buzz-server-auwi.onrender.com/login`,
+      url: "https://buzz-server-auwi.onrender.com/login",
       data: {
         email,
         password,
