@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
@@ -10,9 +10,11 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  const [isTrue, setIsTrue] = useState(false);
   const navigate = useNavigate();
   const logout = () => {
     cookies.remove("TOKEN", { path: "/" });
+    setIsTrue(true);
     navigate("/");
   };
 
@@ -22,7 +24,7 @@ export default function Example() {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="space-y-4">
+        <Menu.Button className="space-y-3">
           <div className="w-16 h-2 bg-yellow-600 rounded-md"></div>
           <div className="w-16 h-2 bg-yellow-600 rounded-md"></div>
           <div className="w-16 h-2 bg-yellow-600 rounded-md"></div>
@@ -66,7 +68,7 @@ export default function Example() {
                 </Link>
               )}
             </Menu.Item>
-            {token ? (
+            {token && !isTrue ? (
               <form>
                 <Menu.Item>
                   {({ active }) => (

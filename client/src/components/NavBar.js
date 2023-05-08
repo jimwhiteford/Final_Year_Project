@@ -62,12 +62,6 @@ function NavBar() {
           <div className="sm:hidden">
             <Menu />
           </div>
-          {/* <div class="space-y-4 sm:hidden cursor-pointer">
-            <div class="w-16 h-2 bg-yellow-600 rounded-md"></div>
-            <div class="w-16 h-2 bg-yellow-600 rounded-md"></div>
-            <div class="w-16 h-2 bg-yellow-600 rounded-md"></div>
-            <Menu />
-          </div> */}
         </div>
       </div>
     </div>

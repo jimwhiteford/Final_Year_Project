@@ -57,10 +57,10 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)} className="bg-slate-300 ">
+    <form onSubmit={(e) => handleSubmit(e)}>
       <div className="flex justify-center h-screen w-screen items-center">
-        <div className="w-full md:w-1/2 flex flex-col items-center ">
-          <h1 className="text-center text-2xl font-bold text-gray-600 mb-6">
+        <div className="w-3/4 md:w-1/2 flex flex-col items-center rounded-lg border shadow-lg bg-slate-50">
+          <h1 className="text-center text-2xl font-bold text-gray-600 mb-6 mt-6">
             LOGIN
           </h1>
 
@@ -79,7 +79,7 @@ export default function Login() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full py-4 px-8 bg-slate-200 placeholder:font-semibold rounded hover:ring-1 outline-blue-500"
+              className="w-full py-4 px-8 bg-slate-300 placeholder:font-semibold rounded hover:ring-1 outline-yellow-500"
               placeholder="Email"
             />
           </div>
@@ -92,7 +92,7 @@ export default function Login() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full py-4 px-8 bg-slate-200 placeholder:font-semibold rounded hover:ring-1 outline-blue-500 "
+              className="w-full py-4 px-8 bg-slate-300 placeholder:font-semibold rounded hover:ring-1 outline-yellow-500 "
               placeholder="Password"
             />
 
@@ -100,7 +100,7 @@ export default function Login() {
               <div>
                 <a
                   href="/register"
-                  className="text-md text-slate-800 hover:text-blue-500"
+                  className="text-md text-slate-800 hover:text-yellow-600"
                 >
                   Not Registered?
                 </a>
@@ -111,7 +111,7 @@ export default function Login() {
               <input
                 value="Login"
                 type="submit"
-                className="py-4 bg-blue-400 w-full rounded text-blue-50 font-bold hover:bg-blue-700"
+                className="py-4 bg-yellow-500 w-full rounded  font-bold hover:bg-yellow-400"
               />
             </div>
           </div>
