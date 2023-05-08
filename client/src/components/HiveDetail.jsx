@@ -40,11 +40,6 @@ const HiveDetail = (props) => {
   const save = () => {
     axios
       .put(`${URL}/updateHive/${props.hive._id}`, {
-        //user: props.user,
-        // apiary: props.slug,
-        // title: title,
-        // slug: slugTemp,
-        // photo: photo,
         hiveType,
         breed,
         queenId,
@@ -56,7 +51,7 @@ const HiveDetail = (props) => {
       })
       .then((res) => {
         console.log(res.data);
-        console.log("Student successfully updated");
+        console.log("Hive successfully updated");
         setIsUpdate(false);
       })
       .catch((error) => {

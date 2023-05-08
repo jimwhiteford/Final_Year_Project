@@ -8,33 +8,52 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState(false);
+  const [error, setError] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
   console.log(login);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    const configuration = {
-      method: "post",
-      url: "https://buzz-server-auwi.onrender.com/login",
-      data: {
-        email,
-        password,
-      },
-    };
-    axios(configuration)
-      .then((result) => {
-        setLogin(true);
-        cookies.set("TOKEN", result.data.token, {
-          path: "/",
+    setError(false);
+    setFormErrors(validate(email, password));
+    if (Object.keys(formErrors).length > 0 || !email || !password) {
+    } else {
+      const configuration = {
+        method: "post",
+        url: "https://buzz-server-auwi.onrender.com/login",
+        data: {
+          email,
+          password,
+        },
+      };
+      axios(configuration)
+        .then((result) => {
+          setLogin(true);
+          cookies.set("TOKEN", result.data.token, {
+            path: "/",
+          });
+          cookies.set("EMAIL", result.data.email, {
+            path: "/",
+          });
+          window.location.href = "/";
+        })
+        .catch((error) => {
+          error = new Error();
+          console.log("not any email or password");
+          setError(true);
         });
-        cookies.set("EMAIL", result.data.email, {
-          path: "/",
-        });
-        window.location.href = "/";
-      })
-      .catch((error) => {
-        error = new Error();
-        alert("Couldnt Login");
-      });
+    }
+  };
+
+  const validate = (email, password) => {
+    const errors = {};
+
+    if (!password) {
+      errors.password = "Password is required!";
+    }
+    if (!email) {
+      errors.email = "Email is required!";
+    }
+    return errors;
   };
 
   return (
@@ -46,6 +65,14 @@ export default function Login() {
           </h1>
 
           <div className="w-3/4 mb-6">
+            {error === true ? (
+              <p className="text-red-500">
+                Email or Password could not be found.
+              </p>
+            ) : (
+              <></>
+            )}
+            <p className="text-red-500">{formErrors.email}</p>
             <input
               type="email"
               name="email"
@@ -58,6 +85,7 @@ export default function Login() {
           </div>
 
           <div className="w-3/4 mb-6">
+            <p className="text-red-500">{formErrors.password}</p>
             <input
               type="password"
               name="password"

@@ -10,50 +10,60 @@ const SaveCard = (props) => {
   const navigate = useNavigate();
   const [photo, setPhoto] = useState("");
   const [title, setTitle] = useState("");
+  const [formErrors, setFormErrors] = useState({});
 
   const sendContent = () => {
-    const slugTemp = title.replace(/\s+/g, "-").toLowerCase();
-    axios
-      .post(`${URL}/createApiary`, {
-        user: props.user,
-        title: title,
-        slug: slugTemp,
-        photo: photo,
-      })
-      .then((response) => {
-        alert("Apiary Created");
-        navigate(0);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setFormErrors(validate(title));
+    if (Object.keys(formErrors).length > 0 || !title) {
+    } else {
+      const slugTemp = title.replace(/\s+/g, "-").toLowerCase();
+      axios
+        .post(`${URL}/createApiary`, {
+          user: props.user,
+          title: title,
+          slug: slugTemp,
+          photo: photo,
+        })
+        .then((response) => {
+          alert("Apiary Created");
+          navigate(0);
+        })
+        .catch((error) => {
+          alert("please add a title");
+          console.log(error);
+        });
+    }
   };
 
   const sendHiveContent = () => {
-    const slugTemp = title.replace(/\s+/g, "-").toLowerCase();
-    axios
-      .post(`${URL}/createHive`, {
-        user: props.user,
-        apiary: props.slug,
-        title: title,
-        slug: slugTemp,
-        photo: photo,
-        hiveType: "",
-        breed: "",
-        queenId: "",
-        queenNote: "",
-        hiveNote: "",
-        broodBox: "",
-        supers: "",
-        topBar: "",
-      })
-      .then((response) => {
-        alert("Hive Created");
-        navigate(0);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setFormErrors(validate(title));
+    if (Object.keys(formErrors).length > 0 || !title) {
+    } else {
+      const slugTemp = title.replace(/\s+/g, "-").toLowerCase();
+      axios
+        .post(`${URL}/createHive`, {
+          user: props.user,
+          apiary: props.slug,
+          title: title,
+          slug: slugTemp,
+          photo: photo,
+          hiveType: "",
+          breed: "",
+          queenId: "",
+          queenNote: "",
+          hiveNote: "",
+          broodBox: "",
+          supers: "",
+          topBar: "",
+        })
+        .then((response) => {
+          alert("Hive Created");
+          navigate(0);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   useEffect(() => {
@@ -63,6 +73,16 @@ const SaveCard = (props) => {
       setPhoto(stockApiary);
     }
   }, [props.slug]);
+
+  const validate = (email, password) => {
+    const errors = {};
+
+    if (!title) {
+      errors.title = "Name is required!";
+    }
+
+    return errors;
+  };
 
   return (
     <div className="lg:col-span-4 col-span-1">
@@ -74,18 +94,27 @@ const SaveCard = (props) => {
             </h3>
             <div>
               <div>
-                <p className="font-semibold text-lg">Apiary image:</p>
+                {props.slug ? (
+                  <p className="font-semibold text-lg">Hive image:</p>
+                ) : (
+                  <p className="font-semibold text-lg">Apiary image:</p>
+                )}
+
                 <FileBase64
                   className="text-gray-800 ml-2 w-full"
                   multiple={false}
                   onDone={({ base64 }) => setPhoto(base64)}
                 />
                 <img className="mt-4" src={photo} alt="" />
-
-                <p className="font-semibold text-lg mt-8">Apiary name:</p>
+                {props.slug ? (
+                  <p className="font-semibold text-lg mt-8">Hive name: </p>
+                ) : (
+                  <p className="font-semibold text-lg mt-8">Apiary name: </p>
+                )}
+                <p className="text-red-500">{formErrors.title}</p>
                 <input
                   className="text-gray-800 px-4 p-2 mb-1 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
-                  placeholder="Name"
+                  placeholder="*Name"
                   name="title"
                   type="text"
                   value={title}

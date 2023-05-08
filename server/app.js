@@ -237,35 +237,4 @@ app.route("/deleteHive/:id").delete((req, res, next) => {
   });
 });
 
-// app.route("/createApiary").post(upload.single("photo"), (req, res) => {
-//   const title = req.body.title;
-//   const slug = req.body.slug;
-//   const user = req.body.user;
-//   const photo = req.file.filename;
-
-//   const newApiary = {
-//     title,
-//     slug,
-//     user,
-//     photo,
-//   };
-
-//   const newApiaryUpload = new Apiary(newApiary);
-
-//   newApiaryUpload
-//     .save()
-//     .then(() => res.json("Apiary Added"))
-//     .catch((err) => res.status(400).json("Error: " + err));
-// });
-
-// free endpoint
-app.get("/free-endpoint", (request, response) => {
-  response.json({ message: "You are free to access me anytime" });
-});
-
-// authentication endpoint
-app.get("/auth-endpoint", auth, (request, response) => {
-  response.json({ message: "You are authorized to access me" });
-});
-
 module.exports = app;

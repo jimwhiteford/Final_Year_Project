@@ -6,6 +6,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { URL } from "../App";
 
 const ApiaryCard = ({ post }) => {
+  console.log(post._id);
   const navigate = useNavigate();
   const deleteHive = () => {
     axios

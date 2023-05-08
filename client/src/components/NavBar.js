@@ -29,11 +29,6 @@ function NavBar() {
           </div>
           <div className="hidden ml-6 sm:flex">
             <div className="flex space-x-6">
-              <Link to={"test"}>
-                <button className="bg-yellow-600 text-black hover:bg-yellow-500 px-3 py-2 rounded-md text-lg font-medium no-underline">
-                  test
-                </button>
-              </Link>
               <Link to={"apiarys"}>
                 <button className="bg-yellow-600 text-black hover:bg-yellow-500 px-3 py-2 rounded-md text-lg font-medium no-underline">
                   Apiary's

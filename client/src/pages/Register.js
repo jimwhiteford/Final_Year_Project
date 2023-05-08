@@ -6,28 +6,45 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [register, setRegister] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
   console.log(register);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const configuration = {
-      method: "post",
-      url: `${URL}/register`,
+    setFormErrors(validate(email, password));
+    if (Object.keys(formErrors).length > 0 || !email || !password) {
+    } else {
+      const configuration = {
+        method: "post",
+        url: `${URL}/register`,
 
-      data: {
-        email,
-        password,
-      },
-    };
-    axios(configuration)
-      .then((result) => {
-        setRegister(true);
-        window.location.href = "/login";
-      })
-      .catch((error) => {
-        error = new Error();
-        alert("couldnt register");
-      });
+        data: {
+          email,
+          password,
+        },
+      };
+      axios(configuration)
+        .then((result) => {
+          setRegister(true);
+          window.location.href = "/login";
+        })
+        .catch((error) => {
+          error = new Error();
+          alert("couldnt register");
+        });
+    }
+  };
+
+  const validate = (email, password) => {
+    const errors = {};
+
+    if (!password) {
+      errors.password = "Password is required!";
+    }
+    if (!email) {
+      errors.email = "Email is required!";
+    }
+    return errors;
   };
 
   return (
@@ -39,6 +56,7 @@ export default function Register() {
           </h1>
 
           <div className="w-3/4 mb-6">
+            <p className="text-red-500">{formErrors.email}</p>
             <input
               type="email"
               name="email"
@@ -51,6 +69,7 @@ export default function Register() {
           </div>
 
           <div className="w-3/4 mb-6">
+            <p className="text-red-500">{formErrors.password}</p>
             <input
               type="password"
               name="password"
