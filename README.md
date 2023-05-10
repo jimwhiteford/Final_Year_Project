@@ -104,7 +104,5 @@ Once you have a local copy, open it in your chosen IDE and follow the steps belo
 
 Jim Whiteford - james.whiteford@students.plymouth.ac.uk
 
-Project Link: [final_year_project](https://github.com/jimwhiteford/Final_Year_Project)
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
