@@ -13,57 +13,57 @@ const SaveCard = (props) => {
   const [formErrors, setFormErrors] = useState({});
 
   const sendContent = () => {
-    // setFormErrors(validate(title));
-    // if (Object.keys(formErrors).length > 0 || !title) {
-    // } else {
-    const slugTemp = title.replace(/\s+/g, "-").toLowerCase();
-    axios
-      .post(`${URL}/createApiary`, {
-        user: props.user,
-        title: title,
-        slug: slugTemp,
-        photo: photo,
-      })
-      .then((response) => {
-        alert("Apiary Created");
-        navigate(0);
-      })
-      .catch((error) => {
-        alert("please add a title");
-        console.log(error);
-      });
-    // }
+    setFormErrors(validate(title));
+    if (Object.keys(formErrors).length > 0 || !title) {
+    } else {
+      const slugTemp = title.replace(/\s+/g, "-").toLowerCase();
+      axios
+        .post(`${URL}/createApiary`, {
+          user: props.user,
+          title: title,
+          slug: slugTemp,
+          photo: photo,
+        })
+        .then((response) => {
+          alert("Apiary Created");
+          navigate(0);
+        })
+        .catch((error) => {
+          alert("please add a title");
+          console.log(error);
+        });
+    }
   };
 
   const sendHiveContent = () => {
-    // setFormErrors(validate(title));
-    // if (Object.keys(formErrors).length > 0 || !title) {
-    // } else {
-    const slugTemp = title.replace(/\s+/g, "-").toLowerCase();
-    axios
-      .post(`${URL}/createHive`, {
-        user: props.user,
-        apiary: props.slug,
-        title: title,
-        slug: slugTemp,
-        photo: photo,
-        hiveType: "",
-        breed: "",
-        queenId: "",
-        queenNote: "",
-        hiveNote: "",
-        broodBox: "",
-        supers: "",
-        topBar: "",
-      })
-      .then((response) => {
-        alert("Hive Created");
-        navigate(0);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    // }
+    setFormErrors(validate(title));
+    if (Object.keys(formErrors).length > 0 || !title) {
+    } else {
+      const slugTemp = title.replace(/\s+/g, "-").toLowerCase();
+      axios
+        .post(`${URL}/createHive`, {
+          user: props.user,
+          apiary: props.slug,
+          title: title,
+          slug: slugTemp,
+          photo: photo,
+          hiveType: "",
+          breed: "",
+          queenId: "",
+          queenNote: "",
+          hiveNote: "",
+          broodBox: "",
+          supers: "",
+          topBar: "",
+        })
+        .then((response) => {
+          alert("Hive Created");
+          navigate(0);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   useEffect(() => {
@@ -74,15 +74,15 @@ const SaveCard = (props) => {
     }
   }, [props.slug]);
 
-  // const validate = (title) => {
-  //   const errors = {};
+  const validate = (title) => {
+    const errors = {};
 
-  //   if (!title) {
-  //     errors.title = "Name is required!";
-  //   }
+    if (!title) {
+      errors.title = "Name is required!";
+    }
 
-  //   return errors;
-  // };
+    return errors;
+  };
 
   return (
     <div className="lg:col-span-4 col-span-1">

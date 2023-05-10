@@ -28,11 +28,6 @@ const ApiaryCard = ({ post }) => {
           alt={post.title}
           className="object-top absolute h-80 w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg"
         />
-        {/* <FileBase64
-          className="text-gray-800 px-4 p-2 mb-8 outline-none w-full rounded-lg focus:ring-1 focus: ring-gray-200 bg-gray-100"
-          multiple={false}
-          
-        /> */}
       </div>
       <h1 className="text-slate-600 text-center mb-8 text-3xl font-semibold">
         {post.title}

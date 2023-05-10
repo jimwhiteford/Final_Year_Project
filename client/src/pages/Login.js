@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { URL } from "../App";
 
 const cookies = new Cookies();
 
@@ -10,7 +11,6 @@ export default function Login() {
   const [login, setLogin] = useState(false);
   const [error, setError] = useState(false);
   const [formErrors, setFormErrors] = useState({});
-  console.log(login);
   const handleSubmit = (e) => {
     e.preventDefault();
     setError(false);
@@ -19,7 +19,7 @@ export default function Login() {
     } else {
       const configuration = {
         method: "post",
-        url: "https://buzz-server-auwi.onrender.com/login",
+        url: `${URL}/login`,
         data: {
           email,
           password,

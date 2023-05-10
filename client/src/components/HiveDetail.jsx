@@ -51,7 +51,6 @@ const HiveDetail = (props) => {
       })
       .then((res) => {
         console.log(res.data);
-        console.log("Hive successfully updated");
         setIsUpdate(false);
       })
       .catch((error) => {

@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const Hive = new mongoose.Schema({
-  _id: {
-    type: mongoose.Types.ObjectId,
-    required: false,
-  },
   user: {
     type: String,
     required: [true, "Please provide a user Email"],
