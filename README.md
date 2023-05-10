@@ -11,12 +11,12 @@
     <br />
     <br />
     <a href="https://buzzz.onrender.com/">View Live Site</a>
-    <br />
-    <br />
-    <a href="https://github.com/jimwhiteford/Final_Year_Project"><strong>Explore the docs »</strong></a>
+    
   </p>
 </div>
-
+ <br />
+ <br />
+ <br />
 
 
 <!-- TABLE OF CONTENTS -->
@@ -92,7 +92,7 @@ Once you have a local copy, open it in your chosen IDE and follow the steps belo
    ```js
    npm install
    ```
- 2. now in the terminal type npm run dev to start the development server. 
+2. now in the terminal type npm run dev to start the development server. 
    ```sh
    npm run start
    ```
